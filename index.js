@@ -14,26 +14,33 @@ const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shoppingList")
 
 
-onValue(shoppingListInDB, function(snapshot) {
-    // console.log(snapshot.val())
-    let newArr = Object.values(snapshot.val())
-})
-
-
-// Functions
-let addShoppingItems = (input) => {
-    shoppingListEl.innerHTML += `<li>${input}</li>`
-}
-
-// Another function
-let clearInput = () => {
-    inputFieldEl.value = " "
-}
-
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
     push(shoppingListInDB, inputValue)
     addShoppingItems(inputValue)
     clearInput() 
 })
+
+onValue(shoppingListInDB, function(snapshot) {
+    let newArr = Object.values(snapshot.val())
+    clearShoppingListEl()
+    for (let i=0; i<newArr.length; i++) {
+        addShoppingItems(newArr[i])
+    }
+})
+
+function clearShoppingListEl() {
+    shoppingListEl.innerHTML = ""
+}
+
+function clearInput() {
+    inputFieldEl.value = ""
+}
+
+function addShoppingItems(input) {
+    shoppingListEl.innerHTML += `<li>${input}</li>`
+}
+
+
+
 
