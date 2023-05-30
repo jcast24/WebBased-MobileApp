@@ -15,17 +15,18 @@ const shoppingListEl = document.getElementById("shoppingList")
 
 
 onValue(shoppingListInDB, function(snapshot) {
-    
+    // console.log(snapshot.val())
+    let newArr = Object.values(snapshot.val())
 })
 
 
 // Functions
-addShoppingItems = (input) => {
+let addShoppingItems = (input) => {
     shoppingListEl.innerHTML += `<li>${input}</li>`
 }
 
 // Another function
-clearInput = () => {
+let clearInput = () => {
     inputFieldEl.value = " "
 }
 
